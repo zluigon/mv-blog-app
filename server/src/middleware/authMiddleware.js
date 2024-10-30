@@ -21,13 +21,13 @@ const protectedRoute = asyncHandler(async (req, res, next) => {
       );
       next();
     } catch (error) {
-      res.status(401).json({ message: "Not authorized" });
+      res.status(401).json({ message: "Not authorized1" });
       return;
     }
   }
 
   if (!userToken) {
-    res.status(401).json({ message: "Not authorize" });
+    res.status(401).json({ message: "Not authorized2" });
     return;
   }
 });
