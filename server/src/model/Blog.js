@@ -6,6 +6,7 @@ const blogSchema = new mongoose.Schema({
   content: { type: String, requried: true },
   createdAt: { type: Date, default: () => Date.now() },
   updatedAt: { type: Date },
+  comment: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
 });
 
 const Blog = mongoose.model("Blog", blogSchema);
