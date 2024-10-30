@@ -12,15 +12,15 @@ router.post("/", async (req, res, next) => {
     if (!username || !password) {
       res
         .status(400)
-        .json({ message: "Please incluse all fields to register" });
-      throw new Error("Please include all fields to register");
+        .json({ message: "Please include all fields to register" });
+      return;
     }
 
     const userExists = await User.findOne({ username });
 
     if (userExists) {
       res.status(400).json({ message: "User already exists" });
-      throw new Error("User already exists");
+      return;
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -31,17 +31,18 @@ router.post("/", async (req, res, next) => {
     });
 
     if (!newUser) {
-      res.status(400);
-      throw new Error("Invalid user data; user not created");
+      res.status(400).json({ message: "Unable to create user" });
+      return;
     } else {
       res.status(201).json({
         _id: newUser.id,
         username: newUser.username,
-        // token: generateToken(newUser._id),
+        token: generateToken(newUser._id),
       });
     }
   } catch (error) {
     console.log({ Error: error.message });
+    next(error);
   }
 });
 
