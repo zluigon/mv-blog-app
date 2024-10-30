@@ -1,31 +1,19 @@
-import mongoose from "mongoose";
-import Blog from "./model/Blog.js";
-import User from "./model/User.js";
+import express from "express";
+import path from "path";
+
+import db from "./database/database.js";
 import dotenv from "dotenv";
 
 dotenv.config();
 
-mongoose.connect(process.env.MONGO_URI);
+db();
 
-const testUser = new User({
-  username: "y",
-  password: "abz",
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded());
+
+const PORT = process.env.PORT || 5000;
+
+const server = app.listen(PORT, () => {
+  console.log(`Server is running on PORT ${PORT}`);
 });
-
-await testUser.save();
-
-const article = new Blog({
-  title: "First Blog",
-  author: testUser.id,
-  content: "This is the first blog post using mongoose",
-});
-
-await article.save();
-
-testUser.blogs.push(article.id);
-
-const firtArticle = await Blog.findOne({});
-console.log(firtArticle);
-
-const firstUser = await User.findOne({});
-console.log(firstUser);
