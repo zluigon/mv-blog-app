@@ -1,8 +1,8 @@
-import { Types } from "mongoose";
+import mongoose from "mongoose";
 
 const isValidObjectId = (id) => {
-  if (Types.ObjectId.isValid(id)) {
-    if (String(new ObjectId(id)) === id) return true;
+  if (mongoose.isValidObjectId(id)) {
+    if (String(new mongoose.Types.ObjectId(id)) === id) return true;
     return false;
   }
   return false;

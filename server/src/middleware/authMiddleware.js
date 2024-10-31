@@ -13,6 +13,7 @@ const protectedRoute = asyncHandler(async (req, res, next) => {
     req.headers.authorization.startsWith("Bearer")
   ) {
     try {
+      
       userToken = req.headers.authorization.split(" ")[1];
       const decodedUserToken = jwt.verify(userToken, secret);
 
@@ -21,13 +22,13 @@ const protectedRoute = asyncHandler(async (req, res, next) => {
       );
       next();
     } catch (error) {
-      res.status(401).json({ message: "Not authorized1" });
+      res.status(401).json({ message: "Not authorized" });
       return;
     }
   }
 
   if (!userToken) {
-    res.status(401).json({ message: "Not authorized2" });
+    res.status(401).json({ message: "Not authorized" });
     return;
   }
 });
