@@ -4,10 +4,13 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import db from "./database/database.js";
+import seed from "./database/seed.js";
+
 import userRouter from "../src/routes/userRoutes.js";
 import blogRouter from "../src/routes/blogRoutes.js";
 
 db();
+// seed();
 
 const app = express();
 app.use(express.json());
