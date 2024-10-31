@@ -30,14 +30,16 @@ export const getBlogs = asyncHandler(async (req, res) => {
  */
 export const getBlogId = asyncHandler(async (req, res) => {
   if (!isValidObjectId(req.params.id)) {
-    res.status(400).json({ message: `Invalid ID: ${req.params.id}` });
+    res.status(400).json({ message: `Invalid Blog Id: ${req.params.id}` });
     return;
   }
 
   const blog = await Blog.findById(req.params.id);
 
   if (!blog) {
-    res.status(400).json({ message: `Invalid ID: ${req.params.id}` });
+    res
+      .status(400)
+      .json({ message: `Blog NOT_FOUND with id: ${req.params.id}` });
     return;
   }
   res.status(200).json(blog);
@@ -74,13 +76,15 @@ export const createBlog = asyncHandler(async (req, res) => {
  */
 export const updateBlog = asyncHandler(async (req, res) => {
   if (!isValidObjectId(req.params.id)) {
-    res.status(400).json({ message: `Invalid ID: ${req.params.id}` });
+    res.status(400).json({ message: `Invalid Blog Id: ${req.params.id}` });
     return;
   }
 
   const blog = await Blog.findById(req.params.id);
   if (!blog) {
-    res.status(401).json({ message: "Blog not found" });
+    res
+      .status(401)
+      .json({ message: `Blog NOT_FOUND with id: ${req.params.id}` });
     return;
   }
 
@@ -96,4 +100,33 @@ export const updateBlog = asyncHandler(async (req, res) => {
   );
 
   res.status(200).json(updatedBlog);
+});
+
+/**
+ * @desc     Delete blog
+ * @route    Delete api/blogs/:id
+ * @access   Private
+ */
+export const deleteBlog = asyncHandler(async (req, res) => {
+  if (!isValidObjectId(req.params.id)) {
+    res.status(401).json({ message: `Invalid Blog Id: ${req.params.id}` });
+    return;
+  }
+
+  const blog = await Blog.findById(req.params.id);
+
+  if (!blog) {
+    res
+      .status(401)
+      .json({ message: `Blog NOT_FOUND with id: ${req.params.id}` });
+    return;
+  }
+
+  if (blog.author.toString() !== req.user.id) {
+    res.status(401).json({ message: "Not authorized" });
+    return;
+  }
+
+  const deletedBlog = await blog.deleteOne();
+  res.status(200).json({ success: true, deletedBlog });
 });
