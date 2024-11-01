@@ -1,10 +1,19 @@
+import dotenv from "dotenv";
+
 import User from "../model/User.js";
 import Blog from "../model/Blog.js";
 
+import db from "./database.js";
+import mongoose from "mongoose";
+
 import bcrypt from "bcrypt";
+
+dotenv.config();
 
 const seed = async () => {
   try {
+    await db();
+
     await User.deleteMany({});
     await Blog.deleteMany({});
     console.log("Existing data cleared");
@@ -39,9 +48,12 @@ const seed = async () => {
     await User.findByIdAndUpdate(users[1]._id, { blogs: [blogs[1]._id] });
 
     console.log("Database seeded successfuly");
+
+    mongoose.connection.close();
   } catch (error) {
     console.log(error);
+    mongoose.connection.close();
   }
 };
 
-export default seed;
+seed();

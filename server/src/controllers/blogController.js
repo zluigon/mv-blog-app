@@ -19,7 +19,7 @@ import isValidObjectId from "../utils/isValidObjectId.js";
  * @access   Public
  */
 export const getBlogs = asyncHandler(async (req, res) => {
-  const blogs = await Blog.find({});
+  const blogs = await Blog.find({}).populate("author");
   res.status(200).json(blogs);
 });
 
@@ -34,7 +34,7 @@ export const getBlogId = asyncHandler(async (req, res) => {
     return;
   }
 
-  const blog = await Blog.findById(req.params.id);
+  const blog = await Blog.findById(req.params.id).populate("author").populate("comment");
 
   if (!blog) {
     res
