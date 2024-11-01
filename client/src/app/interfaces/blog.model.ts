@@ -1,6 +1,8 @@
+import { User } from "./user";
+
 export interface Blog {
   title: string;
-  author: string;
+  author: User;
   content: string;
   createdAt: string;
   updatedAt?: string;

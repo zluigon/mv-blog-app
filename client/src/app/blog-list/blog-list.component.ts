@@ -1,43 +1,17 @@
-import { Component, OnInit, signal, WritableSignal } from "@angular/core";
-
-import { RouterModule } from "@angular/router";
-import { MatTableModule } from "@angular/material/table";
-import { MatButtonModule } from "@angular/material/button";
-import { MatCardModule, MatCardFooter } from "@angular/material/card";
+import { Component, OnInit, WritableSignal } from "@angular/core";
 
 import { Blog } from "../interfaces/blog.model";
 import { BlogService } from "../services/blog.service";
+import { BlogComponent } from "../blog/blog.component";
 
 @Component({
   selector: "app-blog-list",
   standalone: true,
-  imports: [
-    RouterModule,
-    MatTableModule,
-    MatButtonModule,
-    MatCardModule,
-    MatCardFooter,
-  ],
+  imports: [BlogComponent],
   templateUrl: "./blog-list.component.html",
-  styles: ``,
+  styleUrl: "./blog-list.component.css",
 })
 export class BlogListComponent implements OnInit {
-  // blogs$: Blog[] = [
-  //   {
-  //     _id: "3",
-  //     title: "Alice's First Blog Post",
-  //     author: "users[0]._id",
-  //     createdAt: "10/31/24",
-  //     content: "This is the content of Alice's first blog post",
-  //   },
-  //   {
-  //     _id: "4",
-  //     title: "Bob's First Blog Post",
-  //     author: "users[1]._id",
-  //     createdAt: "10/31/24",
-  //     content: "This is the content of Bob's first blog post.",
-  //   },
-  // ];
   blogs$ = {} as WritableSignal<Blog[]>;
 
   constructor(private blogService: BlogService) {}
