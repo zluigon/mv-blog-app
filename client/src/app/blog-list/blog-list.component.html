@@ -2,8 +2,10 @@
   <h3>Blog Posts</h3>
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
     @for(blog of blogs$(); track blog._id){
-    <app-blog [blog]="blog"></app-blog>
+    <app-blog [blog]="blog" ></app-blog>
     }
+
   </div>
 </div>

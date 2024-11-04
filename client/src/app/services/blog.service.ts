@@ -23,7 +23,7 @@ export class BlogService {
     return this.blogs$;
   }
 
-  getBlog(id: string) {
+  getBlogById(id: string) {
     this.httpClient.get<Blog>(`${this.url}/${id}`).subscribe((blog) => {
       this.blog$.set(blog);
       return this.blog$;
@@ -42,9 +42,13 @@ export class BlogService {
     });
   }
 
+  // need to accept token
   deleteBlog(id: string) {
     return this.httpClient.delete(`${this.url}/${id}`, {
       responseType: "text",
+      // headers: {
+      //   Authorization: `Bearer ${token}`,
+      // },
     });
   }
 }

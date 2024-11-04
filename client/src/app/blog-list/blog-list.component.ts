@@ -7,7 +7,7 @@ import { BlogComponent } from "../blog/blog.component";
 @Component({
   selector: "app-blog-list",
   standalone: true,
-  imports: [BlogComponent],
+  imports: [BlogComponent,],
   templateUrl: "./blog-list.component.html",
   styleUrl: "./blog-list.component.css",
 })
@@ -18,12 +18,6 @@ export class BlogListComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchBlogs();
-  }
-
-  deleteBlog(id: string): void {
-    this.blogService.deleteBlog(id).subscribe({
-      next: () => this.fetchBlogs(),
-    });
   }
 
   private fetchBlogs(): void {

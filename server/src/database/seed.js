@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 
 import User from "../model/User.js";
 import Blog from "../model/Blog.js";
+import Comment from "../model/Comment.js";
 
 import db from "./database.js";
 import mongoose from "mongoose";
@@ -46,6 +47,15 @@ const seed = async () => {
 
     await User.findByIdAndUpdate(users[0]._id, { blogs: [blogs[0]._id] });
     await User.findByIdAndUpdate(users[1]._id, { blogs: [blogs[1]._id] });
+
+    const comments = await Comment.create([
+      { content: "first comment", author: users[0]._id, blog: blogs[0]._id },
+      { content: "second comment", author: users[1]._id, blog: blogs[1]._id },
+    ]);
+
+    await Blog.findByIdAndUpdate(blogs[0]._id, {
+      comment: [comments[0]._id, comments[1]._id],
+    });
 
     console.log("Database seeded successfuly");
 

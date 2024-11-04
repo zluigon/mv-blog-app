@@ -1,25 +1,19 @@
-<br>
+<br />
 <mat-card appearance="outlined">
-      <mat-card-header>
-        <mat-card-title-group>
-          <mat-card-title>{{ blog.title }}</mat-card-title>
-          <mat-card-subtitle>{{ blog.author.username }}</mat-card-subtitle>
-        </mat-card-title-group>
-      </mat-card-header>
+  <mat-card-header>
+    <mat-card-title-group>
+      <mat-card-title>{{ blog.title }}</mat-card-title>
+      <mat-card-subtitle>{{ blog.author.username }}</mat-card-subtitle>
+    </mat-card-title-group>
+  </mat-card-header>
 
-      <mat-card-content>
-        <p>{{ blog.content }}</p>
-        <p>{{ blog.comment?.length }}</p>
-      </mat-card-content>
+  <mat-card-content>
+    <p>{{ blog.content }}</p>
+  </mat-card-content>
 
-      <mat-card-actions>
-        <button mat-stroked-button color="primary">EDIT</button>
-        <button mat-stroked-button color="warn">DELETE</button>
-      </mat-card-actions>
-
-      <mat-card-footer>
-        <div>
-          {{ blog.createdAt | date : "short" }}
-        </div>
-      </mat-card-footer>
-    </mat-card>
+  <mat-card-actions>
+    <a mat-button color="primary" [routerLink]="['/blogs', blog._id]"
+      >View Details</a
+    >
+  </mat-card-actions>
+</mat-card>

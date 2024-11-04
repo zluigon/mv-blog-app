@@ -34,7 +34,7 @@ export const getBlogId = asyncHandler(async (req, res) => {
     return;
   }
 
-  const blog = await Blog.findById(req.params.id).populate("author").populate("comment");
+  let blog = await Blog.findById(req.params.id).populate("author");
 
   if (!blog) {
     res
