@@ -1,0 +1,29 @@
+<div class="form-container">
+  <form (ngSubmit)="onSubmit()" #postForm="ngForm" class="post-form">
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Title</mat-label>
+      <input
+        matInput
+        type="text"
+        name="Title"
+        required
+        [(ngModel)]="title"
+        #titleInput="ngModel"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Content</mat-label>
+      <textarea
+        matInput
+        name="Content"
+        required
+        [(ngModel)]="content"
+        #contentInput="ngModel"
+        rows="15"
+      ></textarea>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Create Post</button>
+  </form>
+</div>

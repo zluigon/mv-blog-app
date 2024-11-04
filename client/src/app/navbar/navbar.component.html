@@ -12,7 +12,11 @@
   <button mat-stroked-button color="primary" [routerLink]="['/register']">
     Register
   </button>
-  } @if(isLoggedIn$ | async){
+  } @if(isLoggedIn$ | async){ @if(!isHomePage()){
+  <button mat-stroked-button [routerLink]="['']">Home</button>}
+  <button mat-stroked-button color="primary" [routerLink]="['/create-post']">
+    New Post
+  </button>
   <button mat-stroked-button color="warn" (click)="logout()">Logout</button>
   }
 </mat-toolbar>

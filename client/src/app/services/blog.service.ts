@@ -34,27 +34,35 @@ export class BlogService {
     });
   }
 
-  createBlog(blog: Blog) {
+  createBlog(title: string, content: string) {
     const token = this.authService.getToken();
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
 
-    return this.httpClient.post(`${this.url}/`, blog, {
-      responseType: "text",
-      headers,
-    });
+    return this.httpClient.post(
+      `${this.url}/`,
+      { title, content },
+      {
+        responseType: "text",
+        headers,
+      }
+    );
   }
 
-  updateBlog(id: string, blog: Blog) {
+  updateBlog(id: string, title: string, content: string) {
     const token = this.authService.getToken();
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    return this.httpClient.put(`${this.url}/${id}`, blog, {
-      responseType: "text",
-      headers,
-    });
+    return this.httpClient.put(
+      `${this.url}/${id}`,
+      { title, content },
+      {
+        responseType: "text",
+        headers,
+      }
+    );
   }
 
   deleteBlog(id: string) {
