@@ -26,9 +26,7 @@ export class LoginComponent {
   onSubmit() {
     this.authService.login(this.username, this.password).subscribe({
       next: (response: any) => {
-        console.log("Login successful", response);
-        this.authService.storeToken(response.token);
-        this.router.navigate(["/blogs"]);
+        this.router.navigate([""]);
       },
       error: (error) => {
         console.log("Login failed", error);

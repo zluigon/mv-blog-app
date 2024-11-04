@@ -1,0 +1,18 @@
+<mat-toolbar>
+  <span>QuickThinx</span>
+  <span class="spacer"></span>
+
+  @if(!(isLoggedIn$ | async) && !isHomePage()){
+  <button mat-stroked-button [routerLink]="['']">Home</button>
+  } @if(!(isLoggedIn$ | async) && !isLoginPage()){
+  <button mat-stroked-button color="primary" [routerLink]="['/login']">
+    Login
+  </button>
+  } @if(!(isLoggedIn$ | async) && !isRegisterPage()){
+  <button mat-stroked-button color="primary" [routerLink]="['/register']">
+    Register
+  </button>
+  } @if(isLoggedIn$ | async){
+  <button mat-stroked-button color="warn" (click)="logout()">Logout</button>
+  }
+</mat-toolbar>
