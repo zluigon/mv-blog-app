@@ -1,5 +1,7 @@
 import { Component, OnInit, WritableSignal } from "@angular/core";
 
+import { MatGridListModule } from "@angular/material/grid-list";
+
 import { Blog } from "../interfaces/blog.model";
 import { BlogService } from "../services/blog.service";
 import { BlogComponent } from "../blog/blog.component";
@@ -7,7 +9,7 @@ import { BlogComponent } from "../blog/blog.component";
 @Component({
   selector: "app-blog-list",
   standalone: true,
-  imports: [BlogComponent,],
+  imports: [BlogComponent, MatGridListModule],
   templateUrl: "./blog-list.component.html",
   styleUrl: "./blog-list.component.css",
 })

@@ -17,6 +17,7 @@ const seed = async () => {
 
     await User.deleteMany({});
     await Blog.deleteMany({});
+    await Comment.deleteMany({});
     console.log("Existing data cleared");
 
     const hashedPassword = await bcrypt.hash("test", 10);
@@ -30,32 +31,45 @@ const seed = async () => {
         username: "bob",
         password: hashedPassword,
       },
-    ]);
-
-    const blogs = await Blog.create([
       {
-        title: "Alice's First Blog Post",
-        author: users[0]._id,
-        content: "This is the content of Alice's first blog post",
+        username: "charlie",
+        password: hashedPassword,
       },
       {
-        title: "Bob's First Blog Post",
-        author: users[1]._id,
-        content: "This is the content of Bob's first blog post.",
+        username: "dale",
+        password: hashedPassword,
+      },
+      {
+        username: "earl",
+        password: hashedPassword,
       },
     ]);
 
-    await User.findByIdAndUpdate(users[0]._id, { blogs: [blogs[0]._id] });
-    await User.findByIdAndUpdate(users[1]._id, { blogs: [blogs[1]._id] });
+    const blogs = [];
 
-    const comments = await Comment.create([
-      { content: "first comment", author: users[0]._id, blog: blogs[0]._id },
-      { content: "second comment", author: users[1]._id, blog: blogs[1]._id },
-    ]);
+    for (let i = 0; i < 20; i++) {
+      const randomUser = users[Math.floor(Math.random() * users.length)];
+      const newBlog = await Blog.create({
+        title: `Blog Post ${i + 1}`,
+        author: randomUser._id,
+        content: `This is the content for blog post ${i + 1}`,
+      });
+      blogs.push(newBlog);
 
-    await Blog.findByIdAndUpdate(blogs[0]._id, {
-      comment: [comments[0]._id, comments[1]._id],
-    });
+      await User.findByIdAndUpdate(randomUser._id, { blogs: newBlog._id });
+
+      for (let j = 0; j < 3; j++) {
+        const randomCommentUser =
+          users[Math.floor(Math.random() * users.length)];
+        const newComment = await Comment.create({
+          content: `This is comment ${j + 1} for blog post ${i + 1}`,
+          blog: newBlog._id,
+          author: randomCommentUser._id,
+        });
+
+        await Blog.findByIdAndUpdate(newBlog._id, { comment: newComment._id });
+      }
+    }
 
     console.log("Database seeded successfuly");
 
