@@ -1,6 +1,7 @@
 import { Injectable, signal } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Blog } from "../interfaces/blog.model";
+import { AuthService } from "./auth.service";
 
 @Injectable({
   providedIn: "root",
@@ -10,7 +11,10 @@ export class BlogService {
   blogs$ = signal<Blog[]>([]);
   blog$ = signal<Blog>({} as Blog);
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private authService: AuthService
+  ) {}
 
   private refreshBlogs() {
     this.httpClient.get<Blog[]>(`${this.url}/`).subscribe((blogs) => {
@@ -31,24 +35,36 @@ export class BlogService {
   }
 
   createBlog(blog: Blog) {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
     return this.httpClient.post(`${this.url}/`, blog, {
       responseType: "text",
+      headers,
     });
   }
 
   updateBlog(id: string, blog: Blog) {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
     return this.httpClient.put(`${this.url}/${id}`, blog, {
       responseType: "text",
+      headers,
     });
   }
 
-  // need to accept token
   deleteBlog(id: string) {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
     return this.httpClient.delete(`${this.url}/${id}`, {
       responseType: "text",
-      // headers: {
-      //   Authorization: `Bearer ${token}`,
-      // },
+      headers,
     });
   }
 }

@@ -27,8 +27,6 @@ export class BlogComponent {
 
   constructor(private router: Router, private blogService: BlogService) {}
 
-
-  // need to get token and pass it 
   deleteBlog(): void {
     this.blogService.deleteBlog(this.blog._id!).subscribe({
       next: () => {
@@ -41,6 +39,4 @@ export class BlogComponent {
     });
     this.blogService.getBlogs();
   }
-
-  
 }
