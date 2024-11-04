@@ -41,9 +41,12 @@ export class BlogDetailsComponent implements OnInit {
       },
       error: (error) => {
         alert("Failed to delete blog");
-        console.log(error);
       },
     });
     this.blogService.getBlogs();
+  }
+
+  onEdit() {
+    this.router.navigate([`/edit-post/${this.blog$()._id}`]);
   }
 }

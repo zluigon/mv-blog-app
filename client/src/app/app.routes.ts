@@ -6,6 +6,7 @@ import { BlogDetailsComponent } from "./blog-details/blog-details.component";
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
 import { CreateBlogComponent } from "./create-blog/create-blog.component";
+import { EditPostComponent } from "./edit-post/edit-post.component";
 
 export const routes: Routes = [
   { path: "", component: BlogListComponent, title: "Blog List" },
@@ -16,6 +17,11 @@ export const routes: Routes = [
     path: "create-post",
     component: CreateBlogComponent,
     title: "Create New Post",
+  },
+  {
+    path: "edit-post/:id",
+    component: EditPostComponent,
+    title: "Edit Post",
   },
 ];
 
