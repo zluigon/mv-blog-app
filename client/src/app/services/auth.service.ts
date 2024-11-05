@@ -8,7 +8,7 @@ import { tap } from "rxjs/operators";
   providedIn: "root",
 })
 export class AuthService {
-  private apiUrl = "http://localhost:3000/api/users";
+  private url = "http://localhost:3000/api/users";
   private loggedIn = new BehaviorSubject<boolean>(false);
   private loggedInUserId: string = "";
 
@@ -17,11 +17,11 @@ export class AuthService {
   }
 
   register(username: string, password: string) {
-    return this.http.post(`${this.apiUrl}/create`, { username, password });
+    return this.http.post(`${this.url}/create`, { username, password });
   }
 
   login(username: string, password: string) {
-    return this.http.post(`${this.apiUrl}/login`, { username, password }).pipe(
+    return this.http.post(`${this.url}/login`, { username, password }).pipe(
       tap((response: any) => {
         if (response.token) {
           this.loggedInUserId = response._id;

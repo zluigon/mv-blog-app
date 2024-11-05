@@ -52,7 +52,7 @@ const seed = async () => {
       const newBlog = await Blog.create({
         title: `Blog Post ${i + 1}`,
         author: randomUser._id,
-        content: `This is the content for blog post ${i + 1}`,
+        content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu est sem. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse finibus non leo eget placerat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque eu diam sapien. Ut rhoncus semper nulla, tempor sollicitudin nunc. Suspendisse fermentum iaculis placerat. Praesent varius, nibh vulputate maximus pharetra, libero nibh vulputate erat, sit amet porttitor lectus tortor ut sem. Mauris id mauris non lectus fermentum ultricies. Pellentesque convallis mauris et urna ullamcorper euismod.`,
       });
       blogs.push(newBlog);
 
