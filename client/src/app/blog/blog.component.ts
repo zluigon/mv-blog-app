@@ -24,6 +24,7 @@ import { BlogService } from "../services/blog.service";
 })
 export class BlogComponent {
   @Input() blog!: Blog;
+  loggedInUserId!: string;
 
   constructor(private router: Router, private blogService: BlogService) {}
 

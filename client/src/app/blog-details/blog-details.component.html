@@ -1,29 +1,36 @@
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title-group>
+<div class="blog-details-container">
+  <mat-card appearance="outlined" class="blog-details-card">
+    <mat-card-header>
       <mat-card-title>{{ blog$().title }}</mat-card-title>
-      <mat-card-subtitle>{{ blog$().author.username }}</mat-card-subtitle>
-    </mat-card-title-group>
-  </mat-card-header>
+      <mat-card-subtitle
+        >{{ blog$().author.username }} -
+        {{ blog$().createdAt | date }}</mat-card-subtitle
+      >
+    </mat-card-header>
 
-  <mat-card-content>
-    <p>{{ blog$().content }}</p>
+    <mat-card-content>
+      <div class="blog-content">{{ blog$().content }}</div>
 
-    @if(blog$().comment?.length){
-    <p>has comments</p>
+      @if(blog$().comment?.length){
+      <p>has comments</p>
+      }
+    </mat-card-content>
+
+    @if(isAuthor){
+    <mat-card-actions>
+      <button mat-stroked-button color="primary" (click)="onEdit()">
+        EDIT
+      </button>
+      <button mat-stroked-button color="warn" (click)="deleteBlog()">
+        DELETE
+      </button>
+    </mat-card-actions>
     }
-  </mat-card-content>
 
-  <mat-card-actions>
-    <button mat-stroked-button color="primary" (click)="onEdit()">EDIT</button>
-    <button mat-stroked-button color="warn" (click)="deleteBlog()">
-      DELETE
-    </button>
-  </mat-card-actions>
-
-  <mat-card-footer>
-    <div>
-      {{ blog$().createdAt | date : "short" }}
-    </div>
-  </mat-card-footer>
-</mat-card>
+    <mat-card-actions>
+      <button mat-flat-button color="primary" [routerLink]="['/']">
+        Back to Blog List
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -10,6 +10,7 @@ import { tap } from "rxjs/operators";
 export class AuthService {
   private apiUrl = "http://localhost:3000/api/users";
   private loggedIn = new BehaviorSubject<boolean>(false);
+  private loggedInUserId: string = "";
 
   constructor(private http: HttpClient, private router: Router) {
     this.checkLoginStatus();
@@ -23,6 +24,7 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/login`, { username, password }).pipe(
       tap((response: any) => {
         if (response.token) {
+          this.loggedInUserId = response._id;
           this.storeToken(response.token);
           this.loggedIn.next(true);
         }
@@ -46,6 +48,10 @@ export class AuthService {
 
   isLoggedIn(): Observable<boolean> {
     return this.loggedIn.asObservable();
+  }
+
+  getUserId(){
+    return this.loggedInUserId;
   }
 
   private checkLoginStatus(): void {

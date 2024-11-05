@@ -9,21 +9,30 @@ import { MatCardModule } from "@angular/material/card";
 
 import { BlogService } from "../services/blog.service";
 import { Blog } from "../interfaces/blog.model";
+import { AuthService } from "../services/auth.service";
 
 @Component({
   selector: "app-blog-details",
   standalone: true,
-  imports: [DatePipe, MatTableModule, MatButtonModule, MatCardModule],
+  imports: [
+    DatePipe,
+    MatTableModule,
+    MatButtonModule,
+    MatCardModule,
+    RouterModule,
+  ],
   templateUrl: "./blog-details.component.html",
   styleUrl: "./blog-details.component.css",
 })
 export class BlogDetailsComponent implements OnInit {
   blog$ = {} as WritableSignal<Blog>;
+  loggedInUserId!: string;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private blogService: BlogService
+    private blogService: BlogService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -31,6 +40,7 @@ export class BlogDetailsComponent implements OnInit {
     if (blogId) {
       this.blog$ = this.blogService.blog$;
       this.blogService.getBlogById(blogId);
+      this.loggedInUserId = this.authService.getUserId();
     }
   }
 
@@ -48,5 +58,9 @@ export class BlogDetailsComponent implements OnInit {
 
   onEdit() {
     this.router.navigate([`/edit-post/${this.blog$()._id}`]);
+  }
+
+  get isAuthor(): boolean {
+    return this.blog$().author._id === this.loggedInUserId;
   }
 }
