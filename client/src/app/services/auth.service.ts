@@ -50,7 +50,7 @@ export class AuthService {
     return this.loggedIn.asObservable();
   }
 
-  getUserId(){
+  getUserId() {
     return this.loggedInUserId;
   }
 
