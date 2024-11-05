@@ -1,3 +1,23 @@
-.blog-content {
-  white-space: pre-wrap;
+.blog-preview-content {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.truncated-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.truncated-text::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
 }

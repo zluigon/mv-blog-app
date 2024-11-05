@@ -1,5 +1,5 @@
 import { Component, OnInit, WritableSignal } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router, RouterModule } from "@angular/router";
 
 import { FormsModule } from "@angular/forms";
 
@@ -12,7 +12,7 @@ import { Blog } from "../interfaces/blog.model";
 @Component({
   selector: "app-edit-post",
   standalone: true,
-  imports: [MatButtonModule, MatInputModule, FormsModule],
+  imports: [MatButtonModule, MatInputModule, FormsModule, RouterModule],
   templateUrl: "./edit-post.component.html",
   styleUrl: "./edit-post.component.css",
 })

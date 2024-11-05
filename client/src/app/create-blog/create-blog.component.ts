@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router, RouterModule } from "@angular/router";
 
 import { FormsModule } from "@angular/forms";
 
@@ -11,7 +11,7 @@ import { BlogService } from "../services/blog.service";
 @Component({
   selector: "app-create-blog",
   standalone: true,
-  imports: [ MatButtonModule, MatInputModule, FormsModule],
+  imports: [ MatButtonModule, MatInputModule, FormsModule, RouterModule],
   templateUrl: "./create-blog.component.html",
   styleUrl: "./create-blog.component.css",
 })

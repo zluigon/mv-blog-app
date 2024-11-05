@@ -23,7 +23,13 @@
         rows="15"
       ></textarea>
     </mat-form-field>
-
-    <button mat-raised-button color="primary" type="submit">Create Post</button>
+    
+      <button mat-stroked-button color="primary" type="submit">
+        Create Post
+      </button>
+      <br>
+      <a mat-flat-button color="primary" [routerLink]="['/']">
+        Back to Blog List
+      </a>
   </form>
 </div>
