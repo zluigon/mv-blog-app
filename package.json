@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/app.js",
+    "start": "node src/server.js",
     "seed": "cd server && npm i && node src/database/seed.js",
     "build" : "cd .. && cd client && npm i && ng build"
   },
