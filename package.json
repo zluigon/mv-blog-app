@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node cd ../server/src/server.js",
-    "seed": "cd server && npm i && node src/database/seed.js",
-    "build" : "cd .. && cd client && npm i && ng build"
+    "start": "cd server && node src/server.js",
+    "seed": "cd server && npm ci && node src/database/seed.js",
+    "build": "cd client && npm ci && npx ng build"
   },
   "author": "",
   "license": "ISC"
