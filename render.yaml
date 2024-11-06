@@ -1,0 +1,10 @@
+services: 
+ - type: web
+  name: quickthinx
+  env: node
+  buildCommand: |
+    cd client && npm ci && ng build
+  startCommand: cd server && npm start
+  envVars:
+    - key: NODE_VERSION
+      value: 20.x
