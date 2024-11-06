@@ -1,3 +1,10 @@
+.register-title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #3f5ab5;
+}
+
 .form-container {
   display: flex;
   justify-content: center;
