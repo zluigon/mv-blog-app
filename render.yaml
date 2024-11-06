@@ -3,7 +3,7 @@ services:
   name: quickthinx
   env: node
   buildCommand: |
-    cd client && npm ci && ng build
+    cd client && npm ci && npx ng build
   startCommand: cd server && npm start
   envVars:
     - key: NODE_VERSION
