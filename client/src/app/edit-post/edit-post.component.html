@@ -1,5 +1,3 @@
-<p>edit-post works!</p>
-
 <div class="form-container">
   <form (ngSubmit)="onSubmit()" #postForm="ngForm" class="edit-form">
     <mat-form-field appearance="outline" class="form-field">
@@ -26,7 +24,9 @@
       ></textarea>
     </mat-form-field>
 
-    <button mat-stroked-button color="primary" type="submit">Update Post</button>
+    <button mat-stroked-button color="primary" type="submit">
+      Update Post
+    </button>
     <br />
     <a mat-flat-button color="warn" [routerLink]="['/']">Cancel</a>
   </form>

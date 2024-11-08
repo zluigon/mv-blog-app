@@ -2,6 +2,7 @@ import asyncHandler from "express-async-handler";
 
 import User from "../model/User.js";
 import Blog from "../model/Blog.js";
+import Comment from "../model/Comment.js"
 
 import isValidObjectId from "../utils/isValidObjectId.js";
 
@@ -34,7 +35,7 @@ export const getBlogId = asyncHandler(async (req, res) => {
     return;
   }
 
-  let blog = await Blog.findById(req.params.id).populate("author");
+  let blog = await Blog.findById(req.params.id).populate("author").populate("comment").exec();
 
   if (!blog) {
     res
